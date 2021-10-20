@@ -9,3 +9,8 @@
 
 The count is obtained using the link parameter in the reponse header where `commit count = rel="last" page * items per page`
 `link: <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=3>; rel="last"`
+
+## Serverless Package
+`serverless config credentials --provider aws --key <your_access_key_id> --secret <your_access_key_secret>`
+
+`serverless create --template hello-world`
