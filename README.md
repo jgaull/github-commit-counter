@@ -1,7 +1,7 @@
 
 # Tasks
 [ ] Integration test hello-world
-[ ] Connect the VSCode Debugger
+[x] Connect the VSCode Debugger
 [ ] Stub API
 [ ] Build a link parser
 [ ] Add unit test coverage for the link parser
