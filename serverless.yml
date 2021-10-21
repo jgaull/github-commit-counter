@@ -12,12 +12,12 @@ frameworkVersion: '2'
 # The `provider` block defines where your service will be deployed
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
 
 # The `functions` block defines what code to deploy
 functions:
   helloWorld:
-    handler: handler.helloWorld
+    handler: src/handler.helloWorld
     # The `events` block defines how to trigger the handler.helloWorld code
     events:
       - http:
