@@ -40,4 +40,5 @@ Deploy everything
 
 # Time Tracking
 - 10/19, Initial planning, 0.5h
-- 10/20, PoC, 1:00pm ish?
+- 10/20, project scaffold, 1:00pm ish? - 5:00pm ish?
+- 10/21, endpoint PoC, 12:00pm - 1:15pm

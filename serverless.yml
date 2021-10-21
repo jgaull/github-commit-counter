@@ -24,3 +24,11 @@ functions:
           path: hello-world
           method: get
           cors: true
+
+  pulls:
+    handler: src/pulls.handler
+    events:
+      - http:
+          path: api/pulls
+          method: get
+          cors: true
