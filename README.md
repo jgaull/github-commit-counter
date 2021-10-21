@@ -1,12 +1,12 @@
 
 # Tasks
-[x] Integration test hello-world
-[x] Connect the VSCode Debugger
-[ ] Stub API
-[ ] Build a link parser
-[ ] Add unit test coverage for the link parser
-[ ] Implement the count commits endpoint
-[ ] Update integration test
+- [x] Integration test hello-world
+- [x] Connect the VSCode Debugger
+- [ ] Stub API
+- [ ] Build a link parser
+- [ ] Add unit test coverage for the link parser
+- [ ] Implement the count commits endpoint
+- [ ] Update integration test
 
 # Notes
 
@@ -17,7 +17,7 @@
 `https://api.github.com/repos/octocat/Hello-World/pulls/88/commits?per_page=1`
 
 The count is obtained using the link parameter in the reponse header where `commit count = rel="last" page * items per page`
-`link: <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=3>; rel="last"`
+```link: <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=3>; rel="last"```
 
 ## Serverless Package
 
