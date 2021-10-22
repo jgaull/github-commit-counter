@@ -1,7 +1,7 @@
 'use strict';
 
 const got = require('got')
-//const LinkParser = require('./link-parser')
+const LinkParser = require('./link-parser')
 
 const MAX_RESULTS_PER_PAGE = 3 //keeping this low so I don't blow up my API request limits
 
@@ -19,11 +19,9 @@ module.exports.handler = async (event, context) => {
   let pullsBody
   let pullsHeaders
   try {
-    const response = await got(listPullsUrl)
+    const response = await got(listPullsUrl, { username: process.env.GIT_USERNAME, password: process.env.GIT_PASSWORD })
     pullsBody = JSON.parse(response.body)
     pullsHeaders = response.headers
-
-    console.log('headers: ', JSON.stringify(pullsHeaders))
   }
   catch (error) {
 
@@ -40,12 +38,12 @@ module.exports.handler = async (event, context) => {
   }
 
   const commitsRequests = pullsBody.map(value => {
-    return got(`https://api.github.com/repos/${owner}/${repo}/pulls/${value.number}/commits?per_page=1`)
+    return got(`https://api.github.com/repos/${owner}/${repo}/pulls/${value.number}/commits?per_page=1`, { username: process.env.GIT_USERNAME, password: process.env.GIT_PASSWORD })
   })
 
   const commitsResponses = await Promise.all(commitsRequests)
 
-  const commits = commitsResponses.map(response => {
+  const pulls = commitsResponses.map((response, index) => {
 
     const link = response.headers.link
     
@@ -53,45 +51,19 @@ module.exports.handler = async (event, context) => {
     if (link) {
       //find the link for the last page
       //pull out the page number paramater
-      //commitCount = new LinkParser(link).last.page
+      commitCount = new LinkParser(link).last.page
     }
 
-    return {
-      body: JSON.parse(response.body),
-      headers: response.headers
-    }
+    const pull = pullsBody[index]
+    pull.commit_count = commitCount
+    return pull
   })
-
-  console.log('commits: ', JSON.stringify(commits))
-
-  /*
-  let commitsBody
-  let commitsHeaders
-  try {
-    const response = await got(listCommitsUrl)
-    commitsBody = JSON.parse(response.body)
-    commitsHeaders = response.headers
-  }
-  catch (error) {
-    return {
-      statusCode: 500,
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Required for CORS support to work
-      },
-      body: JSON.stringify({
-        message: `Error loading commits from the GitHub API: ${error.message}`,
-        code: 1
-      }),
-    }
-  }
-  */
-  
     
   return {
     statusCode: 200,
     headers: {
       'Access-Control-Allow-Origin': '*', // Required for CORS support to work
     },
-    body: 'there are probably 5 open pull requests',
+    body: JSON.stringify(pulls),
   }
 }

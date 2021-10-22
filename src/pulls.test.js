@@ -1,4 +1,6 @@
 
+require('dotenv').config()
+
 const { handler } = require('./pulls')
 
 describe("pulls", () => {
@@ -110,6 +112,14 @@ describe("pulls", () => {
         const response = await handler(event, context)
         
         expect(typeof response).not.toEqual('error')
-        expect(response.body).toBe('there are probably 5 open pull requests')
+        expect(response.body).toBeDefined()
+        
+        const parsed = JSON.parse(response.body)
+        expect(Array.isArray(parsed)).toBe(true)
+        expect(parsed.length).toBe(3)
+
+        expect(parsed[0].commit_count).toBe(1)
+        expect(parsed[1].commit_count).toBe(1)
+        expect(parsed[2].commit_count).toBe(1)
     })
 })
