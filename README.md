@@ -2,7 +2,7 @@
 # Tasks
 - [x] Integration test hello-world
 - [x] Connect the VSCode Debugger
-- [ ] Stub API
+- [x] Stub API
 - [ ] Build a link parser
 - [ ] Add unit test coverage for the link parser
 - [ ] Implement the count commits endpoint
@@ -42,3 +42,4 @@ Deploy everything
 - 10/19, Initial planning, 0.5h
 - 10/20, project scaffold, 1:00pm ish? - 5:00pm ish?
 - 10/21, endpoint PoC, 12:00pm - 1:15pm
+- 10/21, capture responses + link parser, 4:00 - 6:30
