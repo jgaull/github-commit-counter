@@ -14,7 +14,7 @@ module.exports.handler = async (event, context) => {
   const owner = 'octocat'
   const repo = 'hello-world'
 
-  const listPullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?per_page=${perPage}`
+  const listPullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?per_page=${perPage}&state=open`
 
   let pullsBody
   let pullsHeaders
@@ -41,7 +41,23 @@ module.exports.handler = async (event, context) => {
     return got(`https://api.github.com/repos/${owner}/${repo}/pulls/${value.number}/commits?per_page=1`, { username: process.env.GIT_USERNAME, password: process.env.GIT_PASSWORD })
   })
 
-  const commitsResponses = await Promise.all(commitsRequests)
+  let commitsResponses
+  try {
+    commitsResponses = await Promise.all(commitsRequests)
+  }
+  catch (error) {
+    return {
+      statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Required for CORS support to work
+      },
+      body: JSON.stringify({
+        message: 'Error loading commits from the GitHub API',
+        code: 1
+      }),
+    }
+  }
+  
 
   const pulls = commitsResponses.map((response, index) => {
 

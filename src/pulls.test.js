@@ -118,8 +118,8 @@ describe("pulls", () => {
         expect(Array.isArray(parsed)).toBe(true)
         expect(parsed.length).toBe(3)
 
-        expect(parsed[0].commit_count).toBe(1)
-        expect(parsed[1].commit_count).toBe(1)
-        expect(parsed[2].commit_count).toBe(1)
+        expect(parsed[0].commit_count).toBe(3)
+        expect(parsed[1].commit_count).toBe(3)
+        expect(parsed[2].commit_count).toBe(3)
     })
 })
