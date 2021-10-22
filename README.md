@@ -3,8 +3,9 @@
 - [x] Integration test hello-world
 - [x] Connect the VSCode Debugger
 - [x] Stub API
-- [ ] Build a link parser
-- [ ] Add unit test coverage for the link parser
+- [x] Build a link parser
+- [x] Add unit test coverage for the link parser
+- [ ] Add basic auth to github API requests
 - [ ] Implement the count commits endpoint
 - [ ] Update integration test
 
@@ -43,3 +44,4 @@ Deploy everything
 - 10/20, project scaffold, 1:00pm ish? - 5:00pm ish?
 - 10/21, endpoint PoC, 12:00pm - 1:15pm
 - 10/21, capture responses + link parser, 4:00 - 6:30
+- 10/22, link parser polish, 11:00am - 12:00pm
