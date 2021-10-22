@@ -9,7 +9,13 @@ module.exports = class LinkParser {
         let match
         let links = []
         while (match = LINK_REGEX.exec(link)) {
-            this[match[2]] = new Link(match[1])
+            const link = new Link(match[1])
+            links.push(link)
+            this[match[2]] = link
+        }
+
+        if (links.length == 0) {
+            throw new Error('The link is not in a format that can be parsed.')
         }
     }
 }
@@ -18,6 +24,12 @@ class Link {
 
     constructor (url) {
         this.url = url
-        this.page = Number(url.match(PAGE_REGEX)[1])
+
+        const match = url.match(PAGE_REGEX)
+        if (!match || match.length < 2) {
+            throw new Error('The link does not include a page number.')
+        }
+
+        this.page = Number(match[1])
     }
 }
