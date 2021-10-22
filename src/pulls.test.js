@@ -107,10 +107,9 @@ describe("pulls", () => {
 
         const context = {}
 
-        handler(event, context, (error, response) => {
-
-            expect(error).toBeFalsy()
-            expect(response.body).toBe('there are probably 5 open pull requests')
-        })
+        const response = await handler(event, context)
+        
+        expect(typeof response).not.toEqual('error')
+        expect(response.body).toBe('there are probably 5 open pull requests')
     })
 })
