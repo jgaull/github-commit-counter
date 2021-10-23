@@ -5,9 +5,14 @@
 - [x] Stub API
 - [x] Build a link parser
 - [x] Add unit test coverage for the link parser
-- [ ] Add basic auth to github API requests
-- [ ] Implement the count commits endpoint
-- [ ] Update integration test
+- [x] Add basic auth to github API requests
+- [x] Implement the count commits endpoint
+- [x] Update integration test
+- [ ] Clean up README
+- [ ] Add support for http in GitHubUrlParser
+- [ ] Add count commits for specific PR endpoint
+- [ ] Ensure code coverage exists for commits > 1
+- [ ] Error is not descriptive when repo_url is not set (why?)
 
 # Notes
 
@@ -45,3 +50,4 @@ Deploy everything
 - 10/21, endpoint PoC, 12:00pm - 1:15pm
 - 10/21, capture responses + link parser, 4:00 - 6:30
 - 10/22, link parser polish, 11:00am - 12:00pm
+- 10/22, pulls endpoint implementation, 1pm - 5pm

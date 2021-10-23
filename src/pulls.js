@@ -60,8 +60,6 @@ module.exports.handler = async (event, context) => {
     
     let commitCount = 1
     if (link) {
-      //find the link for the last page
-      //pull out the page number paramater
       commitCount = new LinkParser(link).last.page
     }
 
