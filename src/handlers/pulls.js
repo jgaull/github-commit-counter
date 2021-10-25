@@ -2,8 +2,8 @@
 
 const got = require('got')
 
-const LinkParser = require('./link-parser')
-const GitHubUrlParser = require('./github-url-parser')
+const LinkParser = require('../parsers/link-parser')
+const GitHubUrlParser = require('../parsers/github-url-parser')
 
 const MAX_RESULTS_PER_PAGE = 5 //keeping this low so I don't blow up my API request limits
 const DEFAULT_RESULTS_PER_PAGE = 3

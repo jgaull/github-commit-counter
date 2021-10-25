@@ -11,7 +11,7 @@ describe("pulls", () => {
     //Happy path test
     it("lists open pull requests", async () => {
 
-        const event = require('./pulls-request.json')
+        const event = require('./pulls-request.test.json')
         const context = {}
         const response = await handler(event, context)
         
@@ -31,7 +31,7 @@ describe("pulls", () => {
     //Error path tests
     it("returns an error when the repo_url is not set", async () => {
 
-        const event = require('./pulls-request.json')
+        const event = require('./pulls-request.test.json')
         delete event.queryStringParameters.repo_url
 
         const context = {}
@@ -47,7 +47,7 @@ describe("pulls", () => {
 
     it("returns an error when the repo_url is not valid", async () => {
 
-        const event = require('./pulls-request.json')
+        const event = require('./pulls-request.test.json')
         event.queryStringParameters.repo_url = 'http://www.google.com/nobody/nothing/'
 
         const context = {}
@@ -63,7 +63,7 @@ describe("pulls", () => {
 
     it("returns an error when the rate limit is exceeded when listing pulls", async () => {
 
-        const event = require('./pulls-request.json')
+        const event = require('./pulls-request.test.json')
         event.queryStringParameters.repo_url = 'https://github.com/rate-limiter/pulls-test/'
 
         const context = {}
@@ -79,7 +79,7 @@ describe("pulls", () => {
 
     it("returns an error when the rate limit is exceeded when listing commits", async () => {
 
-        const event = require('./pulls-request.json')
+        const event = require('./pulls-request.test.json')
         event.queryStringParameters.repo_url = 'https://github.com/rate-limiter/commits-test/'
 
         const context = {}
