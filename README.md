@@ -11,8 +11,9 @@
 - [x] Add support for http in GitHubUrlParser
 - [ ] Add count commits for specific PR endpoint
 - [ ] Clean up README
-- [ ] Ensure code coverage exists for commits == 1 (putting this off)
-- [ ] Error is not descriptive when repo_url is not set when running on AWS (why?)
+- [ ] There is no test coverage for commits == 1 (out of scope)
+- [ ] Error is not descriptive when repo_url is not set when running on AWS (out of scope)
+- [ ] Basic auth is not working with the GitHub API (out of scope)
 
 # Notes
 

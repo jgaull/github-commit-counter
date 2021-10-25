@@ -29,6 +29,6 @@ functions:
     handler: src/handlers/pulls.handler
     events:
       - http:
-          path: api/pulls
+          path: api/list-pulls
           method: get
           cors: true
