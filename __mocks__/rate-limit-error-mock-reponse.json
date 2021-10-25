@@ -1,0 +1,31 @@
+{
+	"statusCode": 403,
+	"body": {
+		"message": "API rate limit exceeded for 157.131.170.92. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)",
+		"documentation_url": "https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting"
+	},
+	"headers": {
+		"server": "GitHub.com",
+		"date": "Fri, 22 Oct 2021 23:12:37 GMT",
+		"content-type": "application/json; charset=utf-8",
+		"transfer-encoding": "chunked",
+		"x-ratelimit-limit": "60",
+		"x-ratelimit-remaining": "0",
+		"x-ratelimit-reset": "1634947301",
+		"x-ratelimit-used": "60",
+		"x-ratelimit-resource": "core",
+		"x-github-media-type": "github.v3; format=json",
+		"access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation, Sunset",
+		"access-control-allow-origin": "*",
+		"strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+		"x-frame-options": "deny",
+		"x-content-type-options": "nosniff",
+		"x-xss-protection": "0",
+		"referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+		"content-security-policy": "default-src 'none'",
+		"vary": "Accept-Encoding, Accept, X-Requested-With",
+		"content-encoding": "gzip",
+		"x-github-request-id": "D083:74BC:6E643F:76E15D:61734565",
+		"connection": "close"
+	}
+}
