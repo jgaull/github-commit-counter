@@ -55,22 +55,6 @@ describe("pulls", () => {
         expect(parsed.code).toBe(0)
     })
 
-    it("returns an error when the repo_url is not valid", async () => {
-
-        const event = require('./pulls-request.json')
-        event.queryStringParameters.repo_url = 'http://www.google.com/nobody/nothing/'
-
-        const context = {}
-        const response = await handler(event, context)
-        
-        expect(response.statusCode).toBe(500)
-        expect(response.body).toBeDefined()
-        
-        const parsed = JSON.parse(response.body)
-        expect(parsed.message).toBe('Error parsing github url: The provided url is not a valid GitHub repository url')
-        expect(parsed.code).toBe(0)
-    })
-
     it("returns an error when the rate limit is exceeded when listing pulls", async () => {
 
         const event = require('./pulls-request.json')
