@@ -3,8 +3,12 @@ require('dotenv').config()
 
 const { handler } = require('./pulls')
 
+//For this suite of tests the got module is mocked by Jest automatically.
+//This improves the stability of the tests and shortens the time it takes to run
+//It also keeps us from blowing up our GitHub API rate limit every time we run the test suite
 describe("pulls", () => {
 
+    //Happy path test
     it("lists open pull requests", async () => {
 
         const event = require('./pulls-request.json')
@@ -17,12 +21,14 @@ describe("pulls", () => {
         const parsed = JSON.parse(response.body)
         expect(Array.isArray(parsed)).toBe(true)
         expect(parsed.length).toBe(3)
-
+        //for simplicity the mock data only has one response to the commits request meaning all commit_counts will equal the same number
+        //in production we would want to cover the case where commit_count = 1 since the GitHub API returns a different link property
         expect(parsed[0].commit_count).toBe(3)
         expect(parsed[1].commit_count).toBe(3)
         expect(parsed[2].commit_count).toBe(3)
     })
 
+    //Error path tests
     it("returns an error when the repo_url is not set", async () => {
 
         const event = require('./pulls-request.json')
