@@ -9,10 +9,10 @@
 - [x] Implement the count commits endpoint
 - [x] Update integration test
 - [ ] Clean up README
-- [ ] Add support for http in GitHubUrlParser
+- [x] Add support for http in GitHubUrlParser
 - [ ] Add count commits for specific PR endpoint
 - [ ] Ensure code coverage exists for commits > 1
-- [ ] Error is not descriptive when repo_url is not set (why?)
+- [ ] Error is not descriptive when repo_url is not set when running on AWS (why?)
 
 # Notes
 

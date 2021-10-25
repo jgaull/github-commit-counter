@@ -21,6 +21,15 @@ describe("link-parser", () => {
         expect(parser.repo).toBe('zod-zod789')
     })
 
+    //http instead of https
+    it("parses a valid github URL with http instead of https", async () => {
+        const url = 'http://www.github.com/colin-hacks123/zod-zod789/'
+        const parser = new GitHubUrlParser(url)
+
+        expect(parser.owner).toBe('colin-hacks123')
+        expect(parser.repo).toBe('zod-zod789')
+    })
+
     //failure to parse the string at the highest level
     it("fails to parse an improperly formatted github url", async () => {
 

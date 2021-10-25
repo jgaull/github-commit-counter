@@ -2,7 +2,7 @@
 //Pulls out the owner and repo from the path provided
 //Assumes all owners and repo names contain only a-z, 0-9, and the - (dash) characters
 //There are probably owner and repo names that will break this
-const REGEX = /https:\/\/(?:www\.)?github\.com\/([a-z0-9\-]+)\/([a-z0-9\-]+)/
+const REGEX = /https?:\/\/(?:www\.)?github\.com\/([a-z0-9\-]+)\/([a-z0-9\-]+)/
 
 module.exports = class GitHubUrlParser {
 
