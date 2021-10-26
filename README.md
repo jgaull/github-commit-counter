@@ -56,6 +56,8 @@ npm run deploy
 - [ ] Add a linter (out of scope)
 
 # Time Tracking
+Total: 18h
+
 - 10/19, Initial planning, 0.5h
 - 10/20, project scaffold, 1:00pm ish? - 5:00pm ish?
 - 10/21, endpoint PoC, 12:00pm - 1:15pm
@@ -63,4 +65,4 @@ npm run deploy
 - 10/22, link parser polish, 11:00am - 12:00pm
 - 10/22, pulls endpoint implementation, 1pm - 5pm
 - 10/25, added polish to pulls endpoint, 1:30pm - 5:30pm
-- 10/26, a few last bits and pieces, 10:00 - 11:00am
+- 10/26, a few last bits and pieces, 10:00 - 10:45am
