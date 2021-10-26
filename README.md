@@ -4,7 +4,9 @@ This NodeJS application is designed to run on AWS Lambda. Its purpose is to coun
 
 In order to efficiently implement the core algorithm the count is obtained using the `link` parameter in the reponse header where `commit_count = rel="last" page * per_page`. Note that the example `link` below has a `next` and a `last` page. Since the `per_page` limit is set to 1 commit we can assume that the `commit_count` is equal to the `page` parameter in the link which is associated with `last`. In the below case `commit_count = page = 3`.
 
-```link: <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=3>; rel="last"```
+```
+link: <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=3>; rel="last"
+```
 
 # Environment setup
 
@@ -15,7 +17,9 @@ npm install -g serverless
 ```
 
 ## Add credentials for AWS
-`serverless config credentials --provider aws --key <your_access_key_id> --secret <your_access_key_secret> -o`
+```
+serverless config credentials --provider aws --key <your_access_key_id> --secret <your_access_key_secret> -o
+```
 
 I added the `-o` parameter becaused I received the below error:
 
@@ -29,7 +33,9 @@ With VSCode Installed you can use the built in debugger. Use the `Run all tests`
 You can also run the tests directly using `npm test`.
 
 # Deploying
-`serverless deploy`
+```
+serverless deploy
+```
 
 # ToDo
 - [x] Integration test hello-world
