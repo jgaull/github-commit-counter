@@ -3,7 +3,6 @@
 const got = require('got')
 
 const utils = require('./shared/utils')
-const LinkParser = require('../parsers/link-parser')
 const GitHubAPIUrlFormatter = require('../formatters/github-api-url-formatter')
 
 const MAX_RESULTS_PER_PAGE = 5 //keeping this low so I don't blow up my API request limits
@@ -34,7 +33,6 @@ module.exports.handler = async (event, context) => {
   const listPullsUrl = urlFormatter.createUrlString(`/pulls`)
 
   let pullsBody
-  let pullsHeaders
   try {
     //make the request to the github API and parse the response
     const response = await got(listPullsUrl, {
@@ -46,7 +44,6 @@ module.exports.handler = async (event, context) => {
       }
     })
     pullsBody = JSON.parse(response.body)
-    pullsHeaders = response.headers
   }
   catch (error) {
     return utils.objectForError(`Error loading pull requests from the GitHub API: ${error.message}`)
@@ -71,13 +68,13 @@ module.exports.handler = async (event, context) => {
   
   const pulls = commitCounts.map((commitCount, index) => {
 
-    //Commits responses are stored in the same order as the pulls
+    //Commits responses are stored in the same order as the commit counts (this is how Promise.all works)
     //We can assume each commit response has the same index as its corresponding pull
     const pull = pullsBody[index]
 
-    //The endpoing modifies the response from the GitHub API by adding the commit_count property to each pull
+    //The endpoint modifies the response from the GitHub API by adding the commit_count property to each pull
     //Since the consumer of this data would likely need information for each Pull in addition to the commit_count
-    //I decided to just include the entire response + one additional field for each Pull
+    //I decided to include the entire response + one additional field for each Pull
     pull.commit_count = commitCount
     return pull
   })
