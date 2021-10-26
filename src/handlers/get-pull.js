@@ -28,7 +28,7 @@ module.exports.handler = async (event, context) => {
   }
 
   //create the list pulls request URL
-  const getPullUrl = urlFormatter.createUrlString(`/pulls/${pullNumber}/`)
+  const getPullUrl = urlFormatter.createUrlString(`/pulls/${pullNumber}`)
 
   let pull
   try {

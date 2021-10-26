@@ -9,9 +9,9 @@ const responses = {
     'https://api.github.com/repos/rate-limiter/commits-test/pulls/1073/commits?per_page=1': require('./rate-limit-error-mock-reponse.json'),
     'https://api.github.com/repos/rate-limiter/commits-test/pulls/1072/commits?per_page=1': require('./rate-limit-error-mock-reponse.json'),
     'https://api.github.com/repos/rate-limiter/commits-test/pulls/1071/commits?per_page=1': require('./rate-limit-error-mock-reponse.json'),
-    'https://api.github.com/repos/octocat/hello-world/pulls/1071/': require('./get-pull-mock-response.json'),
-    'https://api.github.com/repos/rate-limiter/pulls-test/pulls/1071/': require('./rate-limit-error-mock-reponse.json'),
-    'https://api.github.com/repos/rate-limiter/commits-test/pulls/1071/': require('./rate-limit-error-mock-reponse.json')
+    'https://api.github.com/repos/octocat/hello-world/pulls/1071': require('./get-pull-mock-response.json'),
+    'https://api.github.com/repos/rate-limiter/pulls-test/pulls/1071': require('./rate-limit-error-mock-reponse.json'),
+    'https://api.github.com/repos/rate-limiter/commits-test/pulls/1071': require('./rate-limit-error-mock-reponse.json')
 }
 
 module.exports = async (url, options) => {
