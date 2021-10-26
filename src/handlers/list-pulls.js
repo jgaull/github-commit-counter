@@ -4,7 +4,7 @@ const got = require('got')
 
 const utils = require('./shared/response-utils')
 const LinkParser = require('../parsers/link-parser')
-const GitHubUrlParser = require('../parsers/github-url-parser')
+const GitHubAPIUrlFormatter = require('../formatters/github-api-url-formatter')
 
 const MAX_RESULTS_PER_PAGE = 5 //keeping this low so I don't blow up my API request limits
 const DEFAULT_RESULTS_PER_PAGE = 3
@@ -21,25 +21,30 @@ module.exports.handler = async (event, context) => {
   }
 
   //validate the github URL to make sure it has both an owner and a repo
-  let owner
-  let repo
+  //validate the github URL to make sure it has both an owner and a repo
+  let urlFormatter
   try {
-    const urlParser = new GitHubUrlParser(repoUrl)
-    owner = urlParser.owner
-    repo = urlParser.repo
+    urlFormatter = new GitHubAPIUrlFormatter(repoUrl)
   }
   catch (error) {
     return utils.objectForError(`Error parsing github url: ${error.message}`)
   }
 
   //create the list pulls request URL
-  const listPullsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls?per_page=${perPage}&state=open`
+  const listPullsUrl = urlFormatter.createUrlString(`/pulls`)
 
   let pullsBody
   let pullsHeaders
   try {
     //make the request to the github API and parse the response
-    const response = await got(listPullsUrl, { username: process.env.GIT_USERNAME, password: process.env.GIT_PASSWORD })
+    const response = await got(listPullsUrl, {
+      username: process.env.GIT_USERNAME,
+      password: process.env.GIT_PASSWORD,
+      searchParams: {
+        per_page: perPage,
+        state: 'open'
+      }
+    })
     pullsBody = JSON.parse(response.body)
     pullsHeaders = response.headers
   }
@@ -51,7 +56,14 @@ module.exports.handler = async (event, context) => {
   const commitsRequests = pullsBody.map(value => {
     //using per_page=1 ensures that there is only one commit per page. 
     //This lets us use the github API's pagination system to efficiently obtain a count of all commits.
-    return got(`https://api.github.com/repos/${owner}/${repo}/pulls/${value.number}/commits?per_page=1`, { username: process.env.GIT_USERNAME, password: process.env.GIT_PASSWORD })
+    const listCommitsUrl = urlFormatter.createUrlString(`/pulls/${value.number}/commits`)
+    return got(listCommitsUrl, { 
+      username: process.env.GIT_USERNAME, 
+      password: process.env.GIT_PASSWORD,
+      searchParams: {
+        per_page: 1,
+      }
+     })
   })
 
   let commitsResponses

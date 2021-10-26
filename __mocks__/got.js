@@ -15,6 +15,21 @@ const responses = {
 }
 
 module.exports = async (url, options) => {
+
+    const searchParams = options.searchParams
+    if (searchParams) {
+        url += '?'
+
+        for (const key in searchParams) {
+
+            if (Object.hasOwnProperty.call(searchParams, key)) {
+                const value = searchParams[key]
+                url+= `${key}=${value}&`
+            }
+        }
+
+        url = url.slice(0, -1)
+    }
     
     const response = responses[url]
 

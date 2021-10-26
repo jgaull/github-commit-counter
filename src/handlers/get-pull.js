@@ -4,7 +4,7 @@ const got = require('got')
 
 const utils = require('./shared/response-utils')
 const LinkParser = require('../parsers/link-parser')
-const GitHubUrlParser = require('../parsers/github-url-parser')
+const GitHubAPIUrlFormatter = require('../formatters/github-api-url-formatter')
 
 module.exports.handler = async (event, context) => {
 
@@ -15,12 +15,9 @@ module.exports.handler = async (event, context) => {
   }
 
   //validate the github URL to make sure it has both an owner and a repo
-  let owner
-  let repo
+  let urlFormatter
   try {
-    const urlParser = new GitHubUrlParser(repoUrl)
-    owner = urlParser.owner
-    repo = urlParser.repo
+    urlFormatter = new GitHubAPIUrlFormatter(repoUrl)
   }
   catch (error) {
     return utils.objectForError(`Error parsing github url: ${error.message}`)
@@ -32,7 +29,7 @@ module.exports.handler = async (event, context) => {
   }
 
   //create the list pulls request URL
-  const getPullUrl = `https://api.github.com/repos/${owner}/${repo}/pulls/${pullNumber}/`
+  const getPullUrl = urlFormatter.createUrlString(`/pulls/${pullNumber}/`)
 
   let pull
   try {
@@ -44,8 +41,9 @@ module.exports.handler = async (event, context) => {
     return utils.objectForError(`Error loading pull request ${pullNumber} from the GitHub API: ${error.message}`)
   }
 
+  const listCommitsUrl = urlFormatter.createUrlString(`/pulls/${pullNumber}/commits?per_page=1`)
+  
   let commitsResponse
-  const listCommitsUrl = `https://api.github.com/repos/${owner}/${repo}/pulls/${pullNumber}/commits?per_page=1`
   try {
     commitsResponse = await got(listCommitsUrl, { username: process.env.GIT_USERNAME, password: process.env.GIT_PASSWORD })
   }

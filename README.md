@@ -14,6 +14,8 @@
 - [ ] There is no test coverage for commits == 1 (out of scope)
 - [ ] Error is not descriptive when repo_url is not set when running on AWS (out of scope)
 - [ ] Basic auth is not working with the GitHub API (out of scope)
+- [ ] Unit tests for github-api-url-formatter (out of scope)
+- [ ] Add a linter (out of scope)
 
 # Notes
 
