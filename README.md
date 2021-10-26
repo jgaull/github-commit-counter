@@ -8,6 +8,11 @@ In order to efficiently implement the core algorithm the count is obtained using
 link: <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=2>; rel="next", <https://api.github.com/repositories/1296269/pulls/88/commits?per_page=1&page=3>; rel="last"
 ```
 
+The final project can be accessed using the below URLS running on an AWS lambda:
+
+- [list-pulls](https://15byt5ikm1.execute-api.us-east-1.amazonaws.com/dev/api/list-pulls?repo_url=https://github.com/octocat/Hello-World/)
+- [get-pull](https://15byt5ikm1.execute-api.us-east-1.amazonaws.com/dev/api/get-pull?repo_url=https://github.com/octocat/Hello-World/&pull_number=1073)
+
 # Environment setup
 
 ## Install Dependencies
@@ -54,6 +59,7 @@ npm run deploy
 - [ ] Basic auth is not working with the GitHub API (out of scope)
 - [ ] Unit tests for github-api-url-formatter (out of scope)
 - [ ] Add a linter (out of scope)
+- [ ] Use URL to hold pull number instead of query parameter (out of scope)
 
 # Time Tracking
 Total: 18h
