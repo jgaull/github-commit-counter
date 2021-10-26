@@ -9,7 +9,7 @@
 - [x] Implement the count commits endpoint
 - [x] Update integration test
 - [x] Add support for http in GitHubUrlParser
-- [ ] Add count commits for specific PR endpoint
+- [x] Add commits_count for get pull endpoint
 - [ ] Clean up README
 - [ ] There is no test coverage for commits == 1 (out of scope)
 - [ ] Error is not descriptive when repo_url is not set when running on AWS (out of scope)
@@ -54,4 +54,4 @@ Deploy everything
 - 10/21, capture responses + link parser, 4:00 - 6:30
 - 10/22, link parser polish, 11:00am - 12:00pm
 - 10/22, pulls endpoint implementation, 1pm - 5pm
-- 10/25, added polish to pulls endpoint, 1:30pm - 2:30pm
+- 10/25, added polish to pulls endpoint, 1:30pm - 5:30pm
