@@ -2,7 +2,7 @@
 
 const got = require('got')
 
-const utils = require('./shared/response-utils')
+const utils = require('./shared/utils')
 const LinkParser = require('../parsers/link-parser')
 const GitHubAPIUrlFormatter = require('../formatters/github-api-url-formatter')
 
@@ -53,37 +53,23 @@ module.exports.handler = async (event, context) => {
   }
 
   //the commitsRequests array holds a promise for each commits request
-  const commitsRequests = pullsBody.map(value => {
+  const commitsRequests = pullsBody.map(pull => {
     //using per_page=1 ensures that there is only one commit per page. 
     //This lets us use the github API's pagination system to efficiently obtain a count of all commits.
-    const listCommitsUrl = urlFormatter.createUrlString(`/pulls/${value.number}/commits`)
-    return got(listCommitsUrl, { 
-      username: process.env.GIT_USERNAME, 
-      password: process.env.GIT_PASSWORD,
-      searchParams: {
-        per_page: 1,
-      }
-     })
+    return utils.countCommits(pull.number, urlFormatter)
   })
 
-  let commitsResponses
+  let commitCounts
   try {
     //Responses will be stored in an array after all requests are successfully fulfilled by the github API
     //If any request fails the catch() block will run
-    commitsResponses = await Promise.all(commitsRequests)
+    commitCounts = await Promise.all(commitsRequests)
   }
   catch (error) {
-    return utils.objectForError(`Error loading commits from the GitHub API: ${error.message}`)
+    return utils.objectForError(`Error loading commit counts from the GitHub API: ${error.message}`)
   }
   
-  const pulls = commitsResponses.map((response, index) => {
-
-    const link = response.headers.link
-    
-    let commitCount = 1
-    if (link) {
-      commitCount = new LinkParser(link).last.page
-    }
+  const pulls = commitCounts.map((commitCount, index) => {
 
     //Commits responses are stored in the same order as the pulls
     //We can assume each commit response has the same index as its corresponding pull

@@ -2,8 +2,7 @@
 
 const got = require('got')
 
-const utils = require('./shared/response-utils')
-const LinkParser = require('../parsers/link-parser')
+const utils = require('./shared/utils')
 const GitHubAPIUrlFormatter = require('../formatters/github-api-url-formatter')
 
 module.exports.handler = async (event, context) => {
@@ -41,27 +40,16 @@ module.exports.handler = async (event, context) => {
     return utils.objectForError(`Error loading pull request ${pullNumber} from the GitHub API: ${error.message}`)
   }
 
-  const listCommitsUrl = urlFormatter.createUrlString(`/pulls/${pullNumber}/commits?per_page=1`)
-  
-  let commitsResponse
-  try {
-    commitsResponse = await got(listCommitsUrl, { username: process.env.GIT_USERNAME, password: process.env.GIT_PASSWORD })
-  }
-  catch (error) {
-    return utils.objectForError(`Error loading commits from the GitHub API: ${error.message}`)
-  }
-
-  const link = commitsResponse.headers.link
-    
-  let commitCount = 1
-  if (link) {
-    commitCount = new LinkParser(link).last.page
-  }
-
   //The endpoint modifies the response from the GitHub API by adding the commit_count property to the pull
   //I did this because I assumed the consumer of this data would likely need information for each Pull in addition to the commit_count
   //An easy way to ensure that I met my consumer's needs was to include the entire response + one additional field so that's how I implemented the solution.
-  pull.commit_count = commitCount
+
+  try {
+    pull.commit_count = await utils.countCommits(pull.number, urlFormatter)
+  }
+  catch (error) {
+    return utils.objectForError(`Error loading commit count from the GitHub API: ${error.message}`)
+  }
   
   //return a success response
   return utils.objectForSuccess(pull)

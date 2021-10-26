@@ -89,7 +89,7 @@ describe("pulls", () => {
         expect(response.body).toBeDefined()
         
         const parsed = JSON.parse(response.body)
-        expect(parsed.message).toBe('Error loading commits from the GitHub API: Response code 403 (Forbidden)')
+        expect(parsed.message).toBe('Error loading commit counts from the GitHub API: Response code 403 (Forbidden)')
         expect(parsed.code).toBe(0)
     })
 })
