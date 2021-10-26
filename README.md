@@ -34,7 +34,7 @@ You can also run the tests directly using `npm test`.
 
 # Deploying
 ```
-serverless deploy
+npm run deploy
 ```
 
 # ToDo

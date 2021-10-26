@@ -4,7 +4,8 @@
   "description": "Counts commits for pull requests using the GitHub api.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "deploy": "serverless deploy"
   },
   "author": "Jonathan Gaull",
   "license": "ISC",
