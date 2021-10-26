@@ -26,9 +26,17 @@ functions:
           cors: true
 
   pulls:
-    handler: src/handlers/pulls.handler
+    handler: src/handlers/list-pulls.handler
     events:
       - http:
-          path: api/pulls
+          path: api/list-pulls
+          method: get
+          cors: true
+
+  pull:
+    handler: src/handlers/get-pull.handler
+    events:
+      - http:
+          path: api/get-pull
           method: get
           cors: true

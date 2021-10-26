@@ -8,7 +8,7 @@ module.exports = class GitHubUrlParser {
 
     /**
      * 
-     * @param {string} url a url returned in the response header from the GitHub API. Must have a page=N query paramater.
+     * @param {string} url a url returned in the response header from the GitHub API.
      */
     constructor (url) {
 
